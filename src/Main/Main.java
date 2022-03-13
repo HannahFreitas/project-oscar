@@ -13,5 +13,7 @@ public class Main {
 
         readFileMale.actorOscarMinAge();
 
+        readFileFemale.actressMoreAwarded();
+
     }
 }

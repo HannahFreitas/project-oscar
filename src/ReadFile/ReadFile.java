@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,11 +41,26 @@ public class ReadFile {
         this.getPersonList()
                 .stream()
                 .min(Comparator.comparing(Person::getAge))
-                .ifPresent(it -> System.out.print("O ator mais jovem a ganhar um oscar é: "
+                .ifPresent(it -> System.out.print("\nO ator mais jovem a ganhar um oscar é: "
                 + it.getName()));
     }
 
 
+    public void actressMoreAwarded() {
+        System.out.print("\nQuem foi a atriz que mais vezes foi premiada?\n");
+        Map<String, Long> moreAwarded = this.getPersonList()
+                .stream()
+                .map(Person::getName)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        moreAwarded.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .ifPresent(it -> System.out.print(it.getKey() +
+                        " foi a atriz mais premiada, ganhando o total de " +
+                        it.getValue() +
+                        " oscars"));
+    }
 
 
 }
