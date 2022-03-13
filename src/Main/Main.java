@@ -20,7 +20,11 @@ public class Main {
 
         readFileFemale.listActorsAndActressMoreOneOscar(readFileMale);
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nQual ator ou atriz você deseja buscar? Diste seu nome: ");
+        String typedName = scanner.nextLine();
+        scanner.close();
 
-
+        readFileFemale.actorsAndActressInformation(readFileMale, typedName);
     }
 }

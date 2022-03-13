@@ -96,7 +96,15 @@ public class ReadFile {
                 .forEach(person -> System.out.print(person.getKey() + " foi um dos atores ou atrizes que ganhou mais de um oscar.\n"));
     }
 
-   
+    public void actorsAndActressInformation(ReadFile filename, String name) {
+        System.out.print("\nAqui está as informações solicitadas:\n");
+        Map<Person, Long> information = Stream.concat(this.getPersonList().stream(), filename.getPersonList().stream())
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
+        information.entrySet()
+                .stream()
+                .filter(person -> person.getKey().getName().equals(name))
+                .forEach(person -> System.out.print(person.getKey() + "\n"));
+    }
 
 }
