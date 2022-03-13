@@ -62,5 +62,41 @@ public class ReadFile {
                         " oscars"));
     }
 
+    public void actress20and30YearsWinOscar() {
+        System.out.print("\nQual atriz entre 20 e 30 anos que mais vezes foi vencedora?\n");
+        Map<String, Long> moreAwardedAge = this.getPersonList()
+                .stream()
+                .filter(person -> person.getAge() >= 20 && person.getAge() <= 30)
+                .map(Person::getName)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        Long maxValue = moreAwardedAge.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .map(person -> person.getValue())
+                .orElse(0L);
+
+        System.out.print("A atriz que mais venceu foi a ");
+        moreAwardedAge.entrySet()
+                .stream()
+                .filter(person -> person.getValue().equals(maxValue))
+                .forEach(person -> System.out.println(person.getKey()));
+    }
+
+    public void listActorsAndActressMoreOneOscar(ReadFile filename) {
+        System.out.print("\nQuais atores ou atrizes receberam mais de um Oscar?\n");
+
+        Map<String, Long> moreOneOscar = Stream.concat(this.getPersonList().stream(), filename.getPersonList().stream())
+                .map(Person::getName)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        moreOneOscar.entrySet()
+                .stream()
+                .filter(person -> person.getValue() >= 2)
+                .forEach(person -> System.out.print(person.getKey() + " foi um dos atores ou atrizes que ganhou mais de um oscar.\n"));
+    }
+
+   
+
 
 }

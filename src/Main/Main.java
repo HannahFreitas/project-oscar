@@ -2,6 +2,8 @@ package Main;
 
 import ReadFile.ReadFile;
 
+import java.util.Scanner;
+
 public class Main {
     private static ReadFile readFileFemale;
     private static ReadFile readFileMale;
@@ -14,6 +16,11 @@ public class Main {
         readFileMale.actorOscarMinAge();
 
         readFileFemale.actressMoreAwarded();
+        readFileFemale.actress20and30YearsWinOscar();
+
+        readFileFemale.listActorsAndActressMoreOneOscar(readFileMale);
+
+
 
     }
 }
